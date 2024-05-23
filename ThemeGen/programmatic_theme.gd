@@ -14,6 +14,9 @@ var _default_font_size = null
 
 var _save_path = null
 
+# The function that is run to generate / define the theme. Default: define_theme().
+var _theme_generator = null
+
 # The default theme is used to get the data type of each item (e.g. is a given integer
 # a constant or a font size?)
 var _default_theme: Theme
@@ -24,10 +27,9 @@ var styles:
 		return _styles_by_name
 
 
-func setup():
-	# This method is to be overwritten by the developer in a subclass.
-	# The developer should call set_save_path(...) here.
-	pass
+# In a subclass, the developer should create a method called setup() or multiple
+# method starting with the prefix setup_ to define the theme or theme variants.
+# In these methods, the developer should call set_save_path().
 
 
 func define_theme():
@@ -37,6 +39,10 @@ func define_theme():
 
 func set_save_path(path: String):
 	_save_path = path
+
+
+func set_theme_generator(generator: Callable):
+	_theme_generator = generator
 
 
 func define_style(name, style: Dictionary):
@@ -97,17 +103,42 @@ func stylebox_empty(style: Dictionary):
 
 
 func _run():
-	print("---")
 	_default_theme = ThemeDB.get_default_theme()
-	_reset()
 
-	_log("Generating theme...")
-	setup()
-	define_theme()
+	var setup_functions = _discover_theme_setup_functions()
+	print("===")
+	_log("Discovered %s theme(s)." % len(setup_functions))
+
+	for theme in setup_functions:
+		print("--- %s ---" % theme)
+		_generate_theme(theme)
+		print("---")
+	print("===")
+
+
+func _discover_theme_setup_functions():
+	# This dictionary is used as a set to avoid duplicates (which can somehow occur
+	# in get_method_list() for subclasses)
+	var setup_function_names = {}
+
+	for method in get_method_list():
+		if method.name.begins_with("setup") and method.flags == METHOD_FLAG_NORMAL:
+			setup_function_names[method.name] = true
+
+	return setup_function_names.keys().map(get)
+
+
+func _generate_theme(setup_function: Callable):
+	_reset()
+	_log("Setting up theme generation.... (%s)" % setup_function)
+	setup_function.call()
 
 	if _save_path == null:
 		push_error("Save path must be set before generating the theme. (See set_save_path(...))")
 		return
+
+	_log("Generating theme... (%s)" % _theme_generator)
+	_theme_generator.call()
 
 	var theme = Theme.new()
 
@@ -129,12 +160,11 @@ func _run():
 		_log("  > Loading...")
 		_load_style(theme, type_name, style)
 
-	_log("Saving...")
+	_log("Saving to '%s'..." % _save_path)
 	# Ensure that the editor chache is updated.
 	theme.take_over_path(_save_path)
 	ResourceSaver.save(theme, _save_path)
 	_log("Theme generation finished.")
-	print("---")
 
 
 func _reset():
@@ -144,6 +174,7 @@ func _reset():
 	_default_font = null
 	_default_font_size = null
 	_save_path = null
+	_theme_generator = define_theme
 
 
 func _load_default_font(theme: Theme):
