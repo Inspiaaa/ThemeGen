@@ -2,6 +2,8 @@
 
 ![Godot 4.x](https://img.shields.io/badge/Godot-4.x-blue?logo=godot-engine&logoColor=white&style=for-the-badge) ![Gdscript](https://img.shields.io/badge/GDScript-green?logo=godot-engine&logoColor=white&style=for-the-badge) ![Release](https://img.shields.io/github/v/release/Inspiaaa/ThemeGen?style=for-the-badge) ![License](https://img.shields.io/github/license/Inspiaaa/ThemeGen?style=for-the-badge) 
 
+ThemeGen — **Possibly the best theming solution for Godot to date**, setting a new standard to keep you sane while developing themes for complex user interfaces.
+
 ThemeGen is a tool for Godot that allows you to easily create themes using GDScript code. The advantage over the UI theme editor is that you can reuse styles, recombine them, and effortlessly reuse and share colours between components.
 
 It can also help you to use semantic colours, and to create multiple theme variations, e.g. a dark theme and a light theme.
