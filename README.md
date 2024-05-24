@@ -54,7 +54,7 @@ Example output for the current file:
 ===
 ```
 
-#### Setting the Default Font
+### Setting the Default Font
 
 ```gdscript
 func define_theme():
@@ -81,7 +81,7 @@ func define_theme():
 	define_default_font_size(default_font_size)
 ```
 
-#### Styling Components
+### Styling Components
 
 To configure the style of a node (e.g. Button, Label, ...) you can call the `define_style` method which takes as parameters:
 - the name of the node to be styled,
@@ -127,7 +127,7 @@ Internally, the theme generator automatically detects the required data type for
 
 While constants, colours, fonts, font sizes, and icons can be used directly when configuring properties, ThemeGen introduces special handling for StyleBoxes to make your life easier.
 
-#### Using StyleBoxes
+### Using StyleBoxes
 
 To create a StyleBox in ThemeGen, you can use one of the following methods:
 - `stylebox_flat(...)`
@@ -228,7 +228,7 @@ func define_theme():
 	})
 ```
 
-#### Shortcuts for Repetitive Properties
+### Shortcuts for Repetitive Properties
 
 As always having to write out the property names for all border sides (see examples above), the corner radii, expand margins, and content margins is tedious, this tool provides a special mechanism to avoid this boilerplate:
 
@@ -408,7 +408,7 @@ Running this produces the following output:
 
 As you can see, ThemeGen informs you that it has found both setup functions and shows you the output of each one, which can be useful when debugging.
 
-#### Overriding `define_theme()`
+### Overriding `define_theme()`
 
 If you have multiple theme variants that should not all use the same `define_theme()` method, you can explicitly set which function it should use instead in the setup function:
 
