@@ -117,15 +117,18 @@ func _run():
 
 
 func _discover_theme_setup_functions():
-	# This dictionary is used as a set to avoid duplicates (which can somehow occur
-	# in get_method_list() for subclasses)
-	var setup_function_names = {}
+	var setup_function_names = []
 
 	for method in get_method_list():
 		if method.name.begins_with("setup") and method.flags == METHOD_FLAG_NORMAL:
-			setup_function_names[method.name] = true
+			setup_function_names.append(method.name)
 
-	return setup_function_names.keys().map(get)
+	var unique_function_names = []
+	for name in setup_function_names:
+		if name not in unique_function_names:
+			unique_function_names.append(name)
+
+	return unique_function_names.map(get)
 
 
 func _generate_theme(setup_function: Callable):
