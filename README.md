@@ -54,7 +54,7 @@ Example output for the current file:
 ===
 ```
 
-Sometimes the Godot editor does not update directly when regenerating the theme. Setting the `Theme` property of the root control node again or reloading the editor fixes the inconsistent rendering.
+Sometimes the Godot editor does not update directly when regenerating the theme. Setting the `Theme` property of the root control node again or reloading the editor fixes this issue.
 
 ### Setting the Default Font
 
