@@ -6,7 +6,7 @@ ThemeGen is a tool for Godot that allows you to easily create themes using GDScr
 
 It can also help you to use semantic colours, and to create multiple theme variations, e.g. a dark theme and a light theme.
 
-![[./docs/code.png]]
+![ExampleCode](./docs/code.png)
 ## Setup
 
 1. Go to the [Releases](https://github.com/Inspiaaa/ThemeGen/releases) page and download the latest version of this library.
@@ -35,7 +35,7 @@ There are two main methods to define:
 
 To run the theme generator, click on `File/Run` (or use `Ctrl+Shift+X`) while editing the script. In the `Output` tab, you'll see the status of the generator and any errors that occur during execution.
 
-![[./docs/run.png]]
+![Run Button](./docs/run.png)
 
 Example output for the current file:
 
