@@ -435,8 +435,23 @@ func setup_custom_theme():
 	set_theme_generator(define_custom_theme)
 
 func define_theme():
-	# ....
+	# ...
 
 func define_custom_theme():
 	# ...
 ```
+
+### Setting Custom Theme Properties
+
+In Godot you can also create custom theme properties which are not used directly by any of the built-in nodes, but can instead be used by the developer. 
+
+In order to add custom properties, you can access the generated theme instance directly via the `current_theme` property:
+
+```gdscript
+# ...
+
+func define_theme():
+	current_theme.set_color("custom_color", "custom_type", Color.RED)
+```
+
+See the official [Theme](https://docs.godotengine.org/en/stable/classes/class_theme.html) documentation for more information on how to interact with the Theme instance.
