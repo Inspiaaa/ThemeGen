@@ -81,7 +81,7 @@ func copy(style: Dictionary):
 
 
 func include(main_style, style1, style2=null, style3=null, style4=null, style5=null, style6=null, style7=null, style8=null):
-	for style in [style2, style3, style4, style5, style6, style7, style8]:
+	for style in [style1, style2, style3, style4, style5, style6, style7, style8]:
 		if style != null:
 			main_style.merge(style, true)
 
