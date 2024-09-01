@@ -21,10 +21,18 @@ var _theme_generator = null
 # a constant or a font size?)
 var _default_theme: Theme
 
+# Current theme instance used by the generator.
+var _current_theme: Theme
+
 
 var styles:
 	get:
 		return _styles_by_name
+
+var current_theme:
+	get:
+		assert(_current_theme != null, "The current theme instance can only be accessed from within define_theme().") 
+		return _current_theme
 
 
 # In a subclass, the developer should create a method called setup() or multiple
@@ -141,9 +149,12 @@ func _generate_theme(setup_function: Callable):
 		return
 
 	_log("Generating theme... (%s)" % _theme_generator)
-	_theme_generator.call()
-
 	var theme = Theme.new()
+	
+	# Make the current theme instance available during define_theme().
+	_current_theme = theme
+	_theme_generator.call()
+	_current_theme = null
 
 	_log("Loading default font...")
 	_load_default_font(theme)
@@ -177,6 +188,7 @@ func _reset():
 	_default_font = null
 	_default_font_size = null
 	_save_path = null
+	_current_theme = null
 	_theme_generator = define_theme
 
 
