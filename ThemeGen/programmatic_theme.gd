@@ -29,7 +29,7 @@ var styles:
 	get:
 		return _styles_by_name
 
-var current_theme:
+var current_theme: Theme:
 	get:
 		assert(_current_theme != null, "The current theme instance can only be accessed from within define_theme().") 
 		return _current_theme
