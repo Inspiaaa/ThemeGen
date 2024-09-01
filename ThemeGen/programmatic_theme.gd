@@ -175,9 +175,7 @@ func _generate_theme(setup_function: Callable):
 		_load_style(theme, type_name, style)
 
 	_log("Saving to '%s'..." % _save_path)
-	# Ensure that the editor chache is updated.
-	theme.take_over_path(_save_path)
-	ResourceSaver.save(theme, _save_path)
+	_save_theme(theme)
 	_log("Theme generation finished.")
 
 
@@ -190,6 +188,24 @@ func _reset():
 	_save_path = null
 	_current_theme = null
 	_theme_generator = define_theme
+
+
+func _save_theme(theme: Theme):
+	_update_existing_theme_instance(theme)
+	ResourceSaver.save(theme, _save_path)
+
+
+func _update_existing_theme_instance(new_theme: Theme):
+	if not ResourceLoader.exists(_save_path):
+		return
+	
+	var existing_theme = load(_save_path)
+	if not existing_theme is Theme:
+		return
+	
+	_log("Updating cached theme instance...")
+	existing_theme.clear()
+	existing_theme.merge_with(new_theme)
 
 
 func _load_default_font(theme: Theme):
