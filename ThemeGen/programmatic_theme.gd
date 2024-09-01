@@ -53,20 +53,20 @@ func set_theme_generator(generator: Callable):
 	_theme_generator = generator
 
 
-func define_style(name, style: Dictionary):
+func define_style(name: String, style: Dictionary):
 	_styles_by_name[name] = style
 
 
-func define_variant_style(name, base_type_name, style: Dictionary = {}):
+func define_variant_style(name: String, base_type_name: String, style: Dictionary = {}):
 	_variant_to_parent_type_name[name] = base_type_name
 	define_style(name, style)
 
 
-func define_default_font(font):
+func define_default_font(font: Font):
 	_default_font = font
 
 
-func define_default_font_size(size):
+func define_default_font_size(size: int):
 	_default_font_size = size
 
 
@@ -80,7 +80,7 @@ func inherit(base_style: Dictionary, style2=null, style3=null, style4=null, styl
 	return inherited_style
 
 
-func merge(style1, style2, style3=null, style4=null, style5=null, style6=null, style7=null, style8=null):
+func merge(style1: Dictionary, style2, style3=null, style4=null, style5=null, style6=null, style7=null, style8=null):
 	return inherit(style1, style2, style3, style4, style5, style6, style7, style8)
 
 
@@ -88,7 +88,7 @@ func copy(style: Dictionary):
 	return style.duplicate()
 
 
-func include(main_style, style1, style2=null, style3=null, style4=null, style5=null, style6=null, style7=null, style8=null):
+func include(main_style: Dictionary, style1, style2=null, style3=null, style4=null, style5=null, style6=null, style7=null, style8=null):
 	for style in [style1, style2, style3, style4, style5, style6, style7, style8]:
 		if style != null:
 			main_style.merge(style, true)
