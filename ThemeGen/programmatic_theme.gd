@@ -196,6 +196,14 @@ func _save_theme(theme: Theme):
 
 
 func _update_existing_theme_instance(new_theme: Theme):
+	# When the editor uses the generated theme file, it loads the resource into
+	# memory. This means that when the new theme is saved, the existing one in
+	# memory is not updated or invalidated until the editor is restarted,
+	# leaving the UI unaffected. 
+	# To fix this issue, the cached theme resource in memory is fetched and 
+	# mutated in-place (using the fact that when a resource is loaded, Godot uses
+	# the shared instance in memory instead of loading a new instance from disk).
+	
 	if not ResourceLoader.exists(_save_path):
 		return
 	
