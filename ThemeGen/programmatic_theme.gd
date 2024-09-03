@@ -6,6 +6,9 @@ class_name ProgrammaticTheme
 # Run the theme generator via File/Run when editing the theme gdscript file.
 
 
+const THEME_GEN_VERSION = "1.1"
+
+
 var _styles_by_name = {}
 var _variant_to_parent_type_name = {}
 
@@ -114,7 +117,7 @@ func _run():
 	_default_theme = ThemeDB.get_default_theme()
 
 	var setup_functions = _discover_theme_setup_functions()
-	print("===")
+	print("=== ThemeGen v%s by Inspiaaa ===" % THEME_GEN_VERSION)
 	_log("Discovered %s theme(s)." % len(setup_functions))
 
 	for theme in setup_functions:
