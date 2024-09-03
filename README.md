@@ -1,6 +1,17 @@
-# ThemeGen
+<p align="center"><img width="250" src="./docs/logo.png" alt="ThemeGen" /></p>
 
-![Godot 4.x](https://img.shields.io/badge/Godot-4.x-blue?logo=godot-engine&logoColor=white&style=for-the-badge) ![Gdscript](https://img.shields.io/badge/GDScript-green?logo=godot-engine&logoColor=white&style=for-the-badge) ![Release](https://img.shields.io/github/v/release/Inspiaaa/ThemeGen?style=for-the-badge) ![License](https://img.shields.io/github/license/Inspiaaa/ThemeGen?style=for-the-badge) 
+<p align="center">
+	<a href="https://godotengine.org/">
+		<img src="https://img.shields.io/badge/Godot-4.x-blue?logo=godot-engine&logoColor=white&style=for-the-badge" alt="Godot 4.x" /></a>
+	<a href="https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html">
+		<img src="https://img.shields.io/badge/GDScript-green?logo=godot-engine&logoColor=white&style=for-the-badge" alt="Gdscript" /></a>
+	<a href="https://github.com/Inspiaaa/ThemeGen/releases">
+		<img src="https://img.shields.io/github/v/release/Inspiaaa/ThemeGen?style=for-the-badge"" alt="Release" /></a>
+	<a href="https://github.com/Inspiaaa/ThemeGen/blob/master/LICENSE.md">
+		<img src="https://img.shields.io/github/license/Inspiaaa/ThemeGen?style=for-the-badge"" alt="License" /></a>
+</p>
+
+---
 
 ThemeGen — **Possibly the best theming solution for Godot to date**, setting a new standard to keep you sane while developing themes for complex user interfaces.
 
