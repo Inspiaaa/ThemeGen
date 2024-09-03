@@ -20,8 +20,17 @@ ThemeGen is a tool for Godot that allows you to easily create themes using GDScr
 It can also help you to use semantic colours, and to create multiple theme variations, e.g. a dark theme and a light theme.
 
 ![ExampleCode](./docs/code.png)
+
 ## Setup
 
+**Installation via the Asset Library:**
+1. In the Godot editor, open the `AssetLib` tab and search for this library (`ThemeGen`).
+2. Click on the `ThemeGen` asset, then `Download` and finally on `Install`.
+3. You're ready to go :)
+
+OR
+
+**Direct installation:**
 1. Go to the [Releases](https://github.com/Inspiaaa/ThemeGen/releases) page and download the latest version of this library.
 2. Unzip the files and copy them anywhere into your Godot project.
 
