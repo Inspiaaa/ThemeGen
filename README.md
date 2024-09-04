@@ -451,7 +451,7 @@ func setup_dark_theme():
 
 func setup_custom_theme():
 	set_save_path("res://themes/generated/custom_theme.tres")
-	# Use 'define_custom_theme.' instead of 'define_theme()'.
+	# Use 'define_custom_theme()' instead of 'define_theme()'.
 	set_theme_generator(define_custom_theme)
 
 func define_theme():
