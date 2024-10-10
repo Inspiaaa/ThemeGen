@@ -300,18 +300,19 @@ func _create_stylebox_from_dict(data: Dictionary):
 
 
 func _get_data_type_for_value(default_theme: Theme, theme: Theme, type_name, item_name):
-	if default_theme.get_color_list(type_name).has(item_name):
+	if _type_has_color_item(type_name, item_name):
 		return Theme.DATA_TYPE_COLOR
-	if default_theme.get_constant_list(type_name).has(item_name):
+	if _type_has_constant_item(type_name, item_name):
 		return Theme.DATA_TYPE_CONSTANT
-	if default_theme.get_font_list(type_name).has(item_name):
+	if _type_has_font_item(type_name, item_name):
 		return Theme.DATA_TYPE_FONT
-	if default_theme.get_font_size_list(type_name).has(item_name):
+	if _type_has_font_size_item(type_name, item_name):
 		return Theme.DATA_TYPE_FONT_SIZE
-	if default_theme.get_icon_list(type_name).has(item_name):
+	if _type_has_icon_item(type_name, item_name):
 		return Theme.DATA_TYPE_ICON
-	if default_theme.get_stylebox_list(type_name).has(item_name):
+	if _type_has_style_item(type_name, item_name):
 		return Theme.DATA_TYPE_STYLEBOX
+	
 
 	# This type does not contain this item. => Check the parent type.
 	var parent = theme.get_type_variation_base(type_name)
@@ -324,7 +325,36 @@ func _get_data_type_for_value(default_theme: Theme, theme: Theme, type_name, ite
 
 	return _get_data_type_for_value(default_theme, theme, parent, item_name)
 
-
+func _type_has_color_item(type_name : String, item_name : String):
+	if ClassDB.class_exists(type_name):
+		return ClassDB.instantiate(type_name).get_property_list().filter(func(dict): return dict.name == "theme_override_colors/" + item_name).size() > 0
+	return false
+	
+func _type_has_constant_item(type_name : String, item_name : String):
+	if ClassDB.class_exists(type_name):
+		return ClassDB.instantiate(type_name).get_property_list().filter(func(dict): return dict.name == "theme_override_constants/" + item_name).size() > 0
+	return false
+	
+func _type_has_font_item(type_name : String, item_name : String):
+	if ClassDB.class_exists(type_name):
+		return ClassDB.instantiate(type_name).get_property_list().filter(func(dict): return dict.name == "theme_override_fonts/" + item_name).size() > 0
+	return false
+	
+func _type_has_font_size_item(type_name : String, item_name : String):
+	if ClassDB.class_exists(type_name):
+		return ClassDB.instantiate(type_name).get_property_list().filter(func(dict): return dict.name == "theme_override_font_sizes/" + item_name).size() > 0
+	return false
+	
+func _type_has_icon_item(type_name : String, item_name : String):
+	if ClassDB.class_exists(type_name):
+		return ClassDB.instantiate(type_name).get_property_list().filter(func(dict): return dict.name == "theme_override_icons/" + item_name).size() > 0
+	return false
+	
+func _type_has_style_item(type_name : String, item_name : String):
+	if ClassDB.class_exists(type_name):
+		return ClassDB.instantiate(type_name).get_property_list().filter(func(dict): return dict.name == "theme_override_styles/" + item_name).size() > 0
+	return false
+	
 func _log(message: String):
 	print("[ThemeGen] ", message)
 
