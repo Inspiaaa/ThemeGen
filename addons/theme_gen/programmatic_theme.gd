@@ -20,8 +20,10 @@ var _save_path = null
 # The function that is run to generate / define the theme. Default: define_theme().
 var _theme_generator = null
 
-# The default theme is used to get the data type of each item (e.g. is a given integer
-# a constant or a font size?)
+# The default theme is used to get the base type for each theme variation.
+# Previoiusly, it was also used to get the data type of each item (e.g. is a 
+# given integer a constant or a font size?). If the ClassDB property lookup fails,
+# this system could be used as a fallback in future versions.
 var _default_theme: Theme
 
 # Current theme instance used by the generator.
