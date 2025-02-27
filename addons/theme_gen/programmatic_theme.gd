@@ -312,7 +312,6 @@ func _get_data_type_for_value(default_theme: Theme, theme: Theme, type_name, ite
 		return Theme.DATA_TYPE_ICON
 	if _type_has_style_item(type_name, item_name):
 		return Theme.DATA_TYPE_STYLEBOX
-	
 
 	# This type does not contain this item. => Check the parent type.
 	var parent = theme.get_type_variation_base(type_name)
@@ -324,6 +323,7 @@ func _get_data_type_for_value(default_theme: Theme, theme: Theme, type_name, ite
 		return -1
 
 	return _get_data_type_for_value(default_theme, theme, parent, item_name)
+
 
 func _type_has_color_item(type_name : String, item_name : String):
 	if ClassDB.class_exists(type_name):
@@ -354,7 +354,8 @@ func _type_has_style_item(type_name : String, item_name : String):
 	if ClassDB.class_exists(type_name):
 		return ClassDB.instantiate(type_name).get_property_list().filter(func(dict): return dict.name == "theme_override_styles/" + item_name).size() > 0
 	return false
-	
+
+
 func _log(message: String):
 	print("[ThemeGen] ", message)
 
