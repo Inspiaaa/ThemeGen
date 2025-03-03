@@ -218,7 +218,7 @@ var result = inherit(a, b, c, d)
 
 There is also the `merge` method which essentially does the same, but can show your intent more clearly in some cases, similarly to how there exist semantic tags in HTML.
 
-```
+```gdscript
 var result = merge(a, b, c, d)
 ```
 
