@@ -6,7 +6,7 @@ class_name ProgrammaticTheme
 # Run the theme generator via File/Run when editing the theme gdscript file.
 
 
-const THEME_GEN_VERSION = "1.1.1"
+const THEME_GEN_VERSION = "1.2"
 
 
 var _styles_by_name = {}
