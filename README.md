@@ -157,6 +157,7 @@ To create a StyleBox in ThemeGen, you can use one of the following methods:
 - `stylebox_flat(...)`
 - `stylebox_line(...)`
 - `stylebox_empty(...)`
+- `stylebox_texture(...)`
 
 These methods return special dictionaries which allow you to later combine style boxes together, inherit from them, and configure repetitive properties concisely.
 As their argument these methods expect a dictionary which contains the properties to set on the actual `StyleBoxFlat` / ... instances which are ultimately created.
@@ -300,6 +301,7 @@ Besides this method, there are also the following shortcut methods for repetitiv
 - `corner_radius(...)`
 - `expand_margins(...)`
 - `content_margins(...)`
+- `texture_margins(...)`
 
 ### Creating Custom Style Variations
 
