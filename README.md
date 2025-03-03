@@ -210,7 +210,7 @@ func define_theme():
 	})
 ```
 
-Note that you can also inherit from multiple different StyleBoxes, e.g. 
+Note that you can also inherit from multiple different StyleBoxes, e.g.
 
 ```gdscript
 var result = inherit(a, b, c, d)
@@ -304,7 +304,7 @@ Besides this method, there are also the following shortcut methods for repetitiv
 ### Creating Custom Style Variations
 
 The Godot theming system also allows you to create multiple styles for the same node, by defining *variations*. Variations can inherit from the base style of a node or from another variation (https://docs.godotengine.org/en/stable/tutorials/ui/gui_theme_type_variations.html).
-To create one in code, use the `define_style_variant(name, base_name, style)` method. 
+To create one in code, use the `define_style_variant(name, base_name, style)` method.
 
 ```gdscript
 var title_font_size = 20
@@ -316,7 +316,7 @@ func define_theme():
 	})
 ```
 
-As this feature is implemented in the Godot engine, StyleBoxes are handled differently than in this tool. When you override a StyleBox property on a variant (e.g. `pressed` for Button), then it will not inherit from the StyleBox of the parent type, similarly to how `inherit(...)` would, and instead only uses the properties defined explicitly for this StyleBox. 
+As this feature is implemented in the Godot engine, StyleBoxes are handled differently than in this tool. When you override a StyleBox property on a variant (e.g. `pressed` for Button), then it will not inherit from the StyleBox of the parent type, similarly to how `inherit(...)` would, and instead only uses the properties defined explicitly for this StyleBox.
 
 To avoid this, you can either...
 - ... store the parent StyleBox in a variable and then manually call `inherit` when defining the variant's theme.
@@ -463,7 +463,7 @@ func define_custom_theme():
 
 ### Setting Custom Theme Properties
 
-In Godot you can also create custom theme properties which are not used directly by any of the built-in nodes, but can instead be used by the developer. 
+In Godot you can also create custom theme properties which are not used directly by any of the built-in nodes, but can instead be used by the developer.
 
 In order to add custom properties, you can access the generated theme instance directly via the `current_theme` property:
 
