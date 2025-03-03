@@ -114,6 +114,11 @@ func stylebox_empty(style: Dictionary):
 	as_dictionary.merge(style)
 	return as_dictionary
 
+func stylebox_texture(style: Dictionary):
+	var as_dictionary = {"type": "stylebox_texture"}
+	as_dictionary.merge(style)
+	return as_dictionary
+
 
 func _run():
 	_default_theme = ThemeDB.get_default_theme()
@@ -291,6 +296,8 @@ func _create_stylebox_from_dict(data: Dictionary):
 			stylebox = StyleBoxLine.new()
 		"stylebox_empty":
 			stylebox = StyleBoxEmpty.new()
+		"stylebox_texture":
+			stylebox = StyleBoxTexture.new()
 
 	for attribute in data:
 		if attribute == "type":
@@ -407,4 +414,17 @@ func content_margins(left: int, top = null, right = null, bottom = null):
 		"content_margin_top": top,
 		"content_margin_right": right,
 		"content_margin_bottom": bottom
+	}
+
+
+func texture_margins(left: int, top = null, right = null, bottom = null):
+	if top == null: top = left
+	if right == null: right = left
+	if bottom == null: bottom = top
+
+	return {
+		"texture_margin_left": left,
+		"texture_margin_top": top,
+		"texture_margin_right": right,
+		"texture_margin_bottom": bottom
 	}
