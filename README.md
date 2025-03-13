@@ -499,3 +499,60 @@ const UPDATE_ON_SAVE = true
 ```
 
 Note that this variable must be `const` in order for the static analyser to detect it.
+
+## Logging Verbosity Level
+
+The amount of logs printed to the output tab can be reduced by configuring the verbosity level. You can set it by adding the following **const** variable to your theme script:
+
+```gdscript
+const VERBOSITY = Verbosity.SILENT  # or another value.
+```
+
+Possible values are:
+- `Verbosity.SILENT`: No logging (except for errors).
+- `Verbosity.QUIET`: Only the most important messages are logged.
+- `Verbosity.NORMAL`: Detailed logging. (default)
+
+This settings is respected by the `ProgrammaticTheme` script and by the _Save Sync_ plugin.
+
+Example output for `Verbosity.NORMAL`:
+
+```
+ThemeGen][Save Sync] ProgrammaticTheme res://themes/example_theme.gd has changed.
+[ThemeGen][Save Sync] > Creating instance...
+[ThemeGen][Save Sync] > Generating theme...
+=== ThemeGen v1.3 by Inspiaaa ===
+[ThemeGen] Discovered 1 theme(s).
+[ThemeGen] --- EditorScript(example_theme.gd)::setup ---
+[ThemeGen] Setting up theme generation.... (EditorScript(example_theme.gd)::setup)
+[ThemeGen] Generating theme... (EditorScript(example_theme.gd)::define_theme)
+[ThemeGen] Loading default font...
+[ThemeGen] Loading variants...
+[ThemeGen] Loading styles...
+[ThemeGen] > Style 'Button':
+[ThemeGen]   > Preprocessing...
+[ThemeGen]   > Loading...
+[ThemeGen] > Style 'PanelContainer':
+[ThemeGen]   > Preprocessing...
+[ThemeGen]   > Loading...
+[ThemeGen] Saving to 'res://themes/generated/light_theme.tres'...
+[ThemeGen] Updating cached theme instance...
+[ThemeGen] Theme generation finished.
+[ThemeGen] ---
+===
+```
+
+Example output for `Verbosity.QUIET`:
+
+```
+[ThemeGen][Save Sync] ProgrammaticTheme res://themes/example_theme.gd has changed.
+[ThemeGen] Discovered 1 theme(s).
+[ThemeGen] --- EditorScript(example_theme.gd)::setup ---
+[ThemeGen] Saving to 'res://themes/generated/light_theme.tres'...
+[ThemeGen] ---
+```
+
+Example output for `Verbosity.SILENT`:
+
+```
+```
