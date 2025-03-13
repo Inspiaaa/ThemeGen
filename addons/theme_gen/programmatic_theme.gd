@@ -4,9 +4,19 @@ class_name ProgrammaticTheme
 
 
 # Run the theme generator via File/Run when editing the theme gdscript file.
+# Alternatively, the hot-reload plugin can be used by adding the 
+# following *const* variable in the child script: 
+# 	const HOT_RELOAD = true
+
+# The verbosity level of the logging can be configured by adding the following
+# variable in the child script:
+# 	const VERBOSITY = Verbosity.SILENT # or other option.
 
 
 const THEME_GEN_VERSION = "1.2"
+
+enum Verbosity { SILENT = 0, QUIET = 1, NORMAL = 2 }
+enum _LoggingLevel { INFO = 1, DEBUG = 2 }
 
 
 var _styles_by_name = {}
@@ -124,14 +134,14 @@ func _run():
 	_default_theme = ThemeDB.get_default_theme()
 
 	var setup_functions = _discover_theme_setup_functions()
-	print("=== ThemeGen v%s by Inspiaaa ===" % THEME_GEN_VERSION)
-	_log("Discovered %s theme(s)." % len(setup_functions))
+	_debug_raw("=== ThemeGen v%s by Inspiaaa ===" % THEME_GEN_VERSION)
+	_info("Discovered %s theme(s)." % len(setup_functions))
 
 	for theme in setup_functions:
-		print("--- %s ---" % theme)
+		_info("--- %s ---" % theme)
 		_generate_theme(theme)
-		print("---")
-	print("===")
+		_info("---")
+	_debug_raw("===")
 
 
 func _discover_theme_setup_functions():
@@ -151,14 +161,14 @@ func _discover_theme_setup_functions():
 
 func _generate_theme(setup_function: Callable):
 	_reset()
-	_log("Setting up theme generation.... (%s)" % setup_function)
+	_debug("Setting up theme generation.... (%s)" % setup_function)
 	setup_function.call()
 
 	if _save_path == null:
 		push_error("Save path must be set before generating the theme. (See set_save_path(...))")
 		return
 
-	_log("Generating theme... (%s)" % _theme_generator)
+	_debug("Generating theme... (%s)" % _theme_generator)
 	var theme = Theme.new()
 	
 	# Make the current theme instance available during define_theme().
@@ -166,27 +176,27 @@ func _generate_theme(setup_function: Callable):
 	_theme_generator.call()
 	_current_theme = null
 
-	_log("Loading default font...")
+	_debug("Loading default font...")
 	_load_default_font(theme)
 
-	_log("Loading variants...")
+	_debug("Loading variants...")
 	_load_variants(theme)
 
-	_log("Loading styles...")
+	_debug("Loading styles...")
 	for type_name in _styles_by_name:
-		_log("> Style '%s':" % type_name)
+		_debug("> Style '%s':" % type_name)
 		var style = _styles_by_name[type_name]
 
-		_log("  > Preprocessing...")
+		_debug("  > Preprocessing...")
 		style = style.duplicate()
 		_preprocess_style(style)
 
-		_log("  > Loading...")
+		_debug("  > Loading...")
 		_load_style(theme, type_name, style)
 
-	_log("Saving to '%s'..." % _save_path)
+	_info("Saving to '%s'..." % _save_path)
 	_save_theme(theme)
-	_log("Theme generation finished.")
+	_debug("Theme generation finished.")
 
 
 func _reset():
@@ -221,7 +231,7 @@ func _update_existing_theme_instance(new_theme: Theme):
 	if not existing_theme is Theme:
 		return
 	
-	_log("Updating cached theme instance...")
+	_debug("Updating cached theme instance...")
 	existing_theme.clear()
 	existing_theme.merge_with(new_theme)
 
@@ -361,8 +371,25 @@ func _type_has_property(type_name: String, property_name: String):
 	return properties.any(func(property): return property.name == property_name)
 
 
-func _log(message: String):
-	print("[ThemeGen] ", message)
+func _debug(message: String):
+	_log_raw(_LoggingLevel.DEBUG, "[ThemeGen] " + message)
+
+func _debug_raw(message: String):
+	_log_raw(_LoggingLevel.DEBUG, message)
+
+func _info(message: String):
+	_log_raw(_LoggingLevel.INFO, "[ThemeGen] " + message)
+
+func _info_raw(message: String):
+	_log_raw(_LoggingLevel.INFO, message)
+
+func _log_raw(level: _LoggingLevel, message: String):
+	if level <= _get_logging_level():
+		print(message)
+
+func _get_logging_level():
+	var level = get("VERBOSITY")
+	return Verbosity.NORMAL if level == null else level
 
 
 func border_width(left: int, top = null, right = null, bottom = null):

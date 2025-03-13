@@ -1,6 +1,10 @@
 @tool
 extends EditorPlugin
 
+const LoggingLevel = ProgrammaticTheme._LoggingLevel
+const Verbosity = ProgrammaticTheme.Verbosity
+
+
 func _enable_plugin() -> void:
 	resource_saved.connect(on_resource_changed)
 
@@ -19,12 +23,13 @@ func on_resource_changed(res: Resource):
 	if not constants.get("HOT_RELOAD", false):
 		return
 	
-	_log("ProgrammaticTheme %s has changed." % [res.resource_path])
+	var verbosity = constants.get("VERBOSITY", Verbosity.NORMAL)
+	_info("ProgrammaticTheme %s has changed." % [res.resource_path], verbosity)
 	
-	_log("> Creating instance...")
+	_debug("> Creating instance...", verbosity)
 	var instance = res.new()
 	
-	_log("> Generating theme...")
+	_debug("> Generating theme...", verbosity)
 	instance._run()
 
 
@@ -41,5 +46,12 @@ func inherits_from_programmatic_theme(script: Script):
 	return inherits_from_programmatic_theme(base_class)
 
 
-func _log(message: String):
-	print("[ThemeGen Hot Reload] ", message)
+func _debug(message: String, verbosity: LoggingLevel):
+	_log_raw(LoggingLevel.DEBUG, "[ThemeGen][Hot Reload] " + message, verbosity)
+
+func _info(message: String, verbosity: LoggingLevel):
+	_log_raw(LoggingLevel.INFO, "[ThemeGen][Hot Reload] " + message, verbosity)
+
+func _log_raw(logging_level: LoggingLevel, message: String, verbosity: LoggingLevel):
+	if logging_level <= verbosity:
+		print(message)
