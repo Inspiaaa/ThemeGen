@@ -34,7 +34,7 @@ OR
 
 **Direct installation:**
 1. Go to the [Releases](https://github.com/Inspiaaa/ThemeGen/releases) page and download the latest version of this library.
-2. Unzip the files and copy them anywhere into your Godot project.
+2. Unzip the files and place the `addons` folder in the root of your project. If you already have an `addons` folder, simply merge the two folders (copy the contents). Placing the files in the addons folder allows the live preview plugin to be recognised by Godot.
 
 ## Getting Started
 
