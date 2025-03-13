@@ -16,7 +16,7 @@ class_name ProgrammaticTheme
 ## [url]https://github.com/Inspiaaa/ThemeGen[/url]
 
 
-const THEME_GEN_VERSION = "1.2"
+const THEME_GEN_VERSION = "1.3"
 
 
 ## Determines the verbosity of the logging. 
