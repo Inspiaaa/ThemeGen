@@ -1,22 +1,45 @@
 @tool
 extends EditorScript
 class_name ProgrammaticTheme
-
-
-# Run the theme generator via File/Run when editing the theme gdscript file.
-# Alternatively, the hot-reload plugin can be used by adding the 
-# following *const* variable in the child script: 
-# 	const HOT_RELOAD = true
-
-# The verbosity level of the logging can be configured by adding the following
-# variable in the child script:
-# 	const VERBOSITY = Verbosity.SILENT # or other option.
+## The core class in ThemeGen that allows for the creation
+## of themes through GDScript code.
+##
+## Run the theme generator via File/Run when editing the theme GDScript file.
+## Alternatively, the hot-reload plugin can be used by... [br]
+## ... enabling the hot reload plugin [br]
+## ... and adding the following [b]const[/b] variable in the child script:
+## [codeblock]
+## const HOT_RELOAD = true
+## [/codeblock]
+##
+## See the README for more information: 
+## [url]https://github.com/Inspiaaa/ThemeGen[/url]
 
 
 const THEME_GEN_VERSION = "1.2"
 
-enum Verbosity { SILENT = 0, QUIET = 1, NORMAL = 2 }
-enum _LoggingLevel { INFO = 1, DEBUG = 2 }
+
+## Determines the verbosity of the logging. 
+## It applies to the theme generator and the hot reload plugin. [br]
+## The verbosity level of the logging can be configured by adding the following
+## [b]const[/b] variable in the child script:
+## [codeblock]
+## const VERBOSITY = Verbosity.SILENT # or other option.
+## [/codeblock]
+enum Verbosity { 
+	## No logging (except for errors).
+	SILENT = 0, 
+	## Only the most important messages are logged.
+	QUIET = 1, 
+	## Detailed logging.
+	NORMAL = 2 
+}
+
+# Logging levels that correspond to the Verbosity levels.
+enum _LoggingLevel { 
+	INFO = 1, # For Verbosity.QUIET and higher.
+	DEBUG = 2  # For Verbosity.NORMAL and higher.
+}
 
 
 var _styles_by_name = {}
@@ -40,10 +63,15 @@ var _default_theme: Theme
 var _current_theme: Theme
 
 
-var styles:
+## Dictionary that contains the styles defined via 
+## [method define_style] and [method define_variant_style], 
+## mapping each type name to the corresponding style data.
+var styles: Dictionary:
 	get:
 		return _styles_by_name
 
+## Returns the current [Theme] instance (of the current theme variant being 
+## processed in define_theme), allowing you to add custom properties.
 var current_theme: Theme:
 	get:
 		assert(_current_theme != null, "The current theme instance can only be accessed from within define_theme().") 
