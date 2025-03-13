@@ -20,7 +20,7 @@ func on_resource_changed(res: Resource):
 		return
 	
 	var constants = res.get_script_constant_map()
-	if not constants.get("HOT_RELOAD", false):
+	if not constants.get("UPDATE_ON_SAVE", false):
 		return
 	
 	var verbosity = constants.get("VERBOSITY", Verbosity.NORMAL)
@@ -47,10 +47,10 @@ func inherits_from_programmatic_theme(script: Script):
 
 
 func _debug(message: String, verbosity: LoggingLevel):
-	_log_raw(LoggingLevel.DEBUG, "[ThemeGen][Hot Reload] " + message, verbosity)
+	_log_raw(LoggingLevel.DEBUG, "[ThemeGen][Save Sync] " + message, verbosity)
 
 func _info(message: String, verbosity: LoggingLevel):
-	_log_raw(LoggingLevel.INFO, "[ThemeGen][Hot Reload] " + message, verbosity)
+	_log_raw(LoggingLevel.INFO, "[ThemeGen][Save Sync] " + message, verbosity)
 
 func _log_raw(logging_level: LoggingLevel, message: String, verbosity: LoggingLevel):
 	if logging_level <= verbosity:
