@@ -57,7 +57,7 @@ There are two main methods to define:
 1. `setup` is where you set the output path of the theme generator and where you can initialise variables used in your theme, e.g. primary colour, background colour, ... As you want to avoid editing the output file by accident, it's recommended to put it in a special folder to indicate that it is auto-generated and is likely to be overwritten (`generated` in this example).
 2. In `define_theme` you call special methods that are inherited from the `ProgrammaticTheme` class to add styles to the theme.
 
-To run the theme generator, click on `File/Run` (or use `Ctrl+Shift+X`) while editing the script. In the `Output` tab, you'll see the status of the generator and any errors that occur during execution.
+To run the theme generator, click on `File/Run` (or use `Ctrl+Shift+X`) while editing the script. In the `Output` tab, you'll see the status of the generator and any errors that occur during execution. Alternatively, you can also enable the `Save Sync` plugin (see [live preview](#live-preview)) that automatically generates the theme on save.
 
 ![Run Button](./docs/run.png)
 
