@@ -9,7 +9,7 @@ class_name ProgrammaticTheme
 ## ... enabling the hot reload plugin [br]
 ## ... and adding the following [b]const[/b] variable in the child script:
 ## [codeblock]
-## const HOT_RELOAD = true
+## const UPDATE_ON_SAVE = true
 ## [/codeblock]
 ##
 ## See the README for more information: 
