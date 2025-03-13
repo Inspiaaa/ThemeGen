@@ -15,9 +15,11 @@
 
 ThemeGen — **Possibly the best theming solution for Godot to date**, setting a new standard to keep you sane while developing themes for complex user interfaces.
 
-ThemeGen is a tool for Godot that allows you to easily create themes using GDScript code. The advantage over the UI theme editor is that you can reuse styles, recombine them, and effortlessly reuse and share colours between components.
+ThemeGen is a tool for Godot that allows you to easily **create themes using GDScript code**. The advantage over the UI theme editor is that you can reuse styles, recombine them, and effortlessly reuse and share colours between components.
 
-It can also help you to use semantic colours, and to create multiple theme variations, e.g. a dark theme and a light theme.
+It can also help you to use semantic colours, and to create multiple **theme variations**, e.g. a dark theme and a light theme. 
+
+Thanks to the **live preview** feature, the theme is automatically regenerated whenever the input script is modified, and the changes are immediately reflected in the editor’s preview. This allows for a seamless and real-time development experience (see [below](#live-preview) for more information).
 
 ![ExampleCode](./docs/code.png)
 
@@ -477,3 +479,23 @@ func define_theme():
 ```
 
 See the official [Theme](https://docs.godotengine.org/en/stable/classes/class_theme.html) documentation for more information on how to interact with the Theme instance.
+
+## Live Preview
+
+ThemeGen's live preview feature works in two ways:
+- When a theme generator script is run, all instances of the theme in the editor are automatically updated, allowing you to see the changes directly in the theme preview or in the scene editor.
+- An additional plugin that can be optionally enabled (_recommended_) can automatically regenerate the output theme whenever the input script is modified and saved.
+
+![Live Preview Demo](./docs/save_sync_animation.gif)
+
+To enable the plugin, open `Project` / `Project Settings...` and click on the `Plugins` tab. Then, enable the `ThemeGen Save Sync` plugin. This registers a listener that automatically runs the theme generator when a theme script is saved.
+
+![Plugins Project Settings](./docs/plugin_project_settings.png)
+
+In order for the plugin to run a theme script automatically, you have to mark it by adding the following **const** variable to your script:
+
+```gdscript
+const UPDATE_ON_SAVE = true
+```
+
+Note that this variable must be `const` in order for the static analyser to detect it.
