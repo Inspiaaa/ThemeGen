@@ -5,7 +5,7 @@ const LoggingLevel = ProgrammaticTheme._LoggingLevel
 const Verbosity = ProgrammaticTheme.Verbosity
 
 
-func _enable_plugin() -> void:
+func _enter_tree() -> void:
 	resource_saved.connect(on_resource_changed)
 
 
