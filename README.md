@@ -309,7 +309,7 @@ Besides this method, there are also the following shortcut methods for repetitiv
 ### Creating Custom Style Variations
 
 The Godot theming system also allows you to create multiple styles for the same node, by defining *variations*. Variations can inherit from the base style of a node or from another variation (https://docs.godotengine.org/en/stable/tutorials/ui/gui_theme_type_variations.html).
-To create one in code, use the `define_style_variant(name, base_name, style)` method.
+To create one in code, use the `define_variant_style(name, base_name, style)` method.
 
 ```gdscript
 var title_font_size = 20
