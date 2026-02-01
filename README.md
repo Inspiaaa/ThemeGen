@@ -304,6 +304,7 @@ Besides this method, there are also the following shortcut methods for repetitiv
 - `expand_margins(...)`
 - `content_margins(...)`
 - `texture_margins(...)`
+- `margins(...)`
 
 ### Creating Custom Style Variations
 
