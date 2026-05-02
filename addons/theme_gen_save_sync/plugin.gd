@@ -5,8 +5,21 @@ const LoggingLevel = ProgrammaticTheme._LoggingLevel
 const Verbosity = ProgrammaticTheme.Verbosity
 
 
+var _editor_file_system: EditorFileSystem
+
+
 func _enter_tree() -> void:
 	resource_saved.connect(on_resource_changed)
+	
+	_editor_file_system = EditorInterface.get_resource_filesystem()
+	_editor_file_system.resources_reload.connect(_on_resources_reloaded)
+
+
+func _exit_tree() -> void:
+	if _editor_file_system:
+		if _editor_file_system.resources_reload.is_connected(_on_resources_reloaded):
+			_editor_file_system.resources_reload.disconnect(_on_resources_reloaded)
+		_editor_file_system = null
 
 
 func on_resource_changed(res: Resource):
@@ -31,6 +44,13 @@ func on_resource_changed(res: Resource):
 	
 	_debug("> Generating theme...", verbosity)
 	instance._run()
+
+
+func _on_resources_reloaded(resources: PackedStringArray) -> void:
+	for path: String in resources:
+		if path.ends_with(".gd"):
+			var script: Script = load(path)
+			on_resource_changed(script)
 
 
 func inherits_from_programmatic_theme(script: Script):
