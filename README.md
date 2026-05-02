@@ -485,7 +485,7 @@ See the official [Theme](https://docs.godotengine.org/en/stable/classes/class_th
 
 ThemeGen's live preview feature works in two ways:
 - When a theme generator script is run, all instances of the theme in the editor are automatically updated, allowing you to see the changes directly in the theme preview or in the scene editor.
-- An additional plugin that can be optionally enabled (_recommended_) can automatically regenerate the output theme whenever the input script is modified and saved.
+- An additional plugin that can be optionally enabled (_recommended_) can automatically regenerate the output theme whenever the input script is modified and saved. Changes are also detected if you use an external editor.
 
 ![Live Preview Demo](./docs/save_sync_animation.gif)
 
