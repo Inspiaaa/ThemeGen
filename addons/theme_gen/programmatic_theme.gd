@@ -483,3 +483,15 @@ func texture_margins(left: int, top = null, right = null, bottom = null):
 		"texture_margin_right": right,
 		"texture_margin_bottom": bottom
 	}
+
+func margins(left: int, top = null, right = null, bottom = null):
+	if top == null: top = left
+	if right == null: right = left
+	if bottom == null: bottom = top
+
+	return {
+		"margin_left": left,
+		"margin_top": top,
+		"margin_right": right,
+		"margin_bottom": bottom
+	}
